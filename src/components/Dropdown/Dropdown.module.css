@@ -19,6 +19,10 @@
   padding: 0 20px;
 }
 
+.ddHeader:hover {
+  cursor: pointer;
+}
+
 .ddHeaderTitle {
   width: 90%;
   height: 100%;
@@ -46,7 +50,7 @@
   white-space: nowrap;
 }
 
-.ddListItem {
+.ddListItem, .ddListItemState, .ddListItemCounty {
   background-color: #FFFFFF;
   border: none;
   font-size: 30px;
@@ -55,7 +59,15 @@
   color: #6E6E6E;
 }
 
-.ddListItem:hover {
+.ddListItemState {
+  padding: 10px 40px;
+}
+
+.ddListItemCounty {
+  padding: 10px 60px;
+}
+
+.ddListItemCounty:hover {
   background-color: #E8F1F7;
   cursor: pointer;
 }
