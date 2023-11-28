@@ -1,19 +1,56 @@
-.ddWrapper {
+.button {
+  
+}
 
+.ddWrapper {
+  width: 500px;
+  border: none;
+  color: #6E6E6E;
 }
 
 .ddHeader {
-
+  width: 500px;
+  display: flex;
+  align-items: center;
+  background-color: #FFFFFF;
+  border: solid #6E6E6E 2px;
+  color: #6E6E6E;
 }
 
 .ddHeaderTitle {
+  width: 75%;
+  height: 100%;
+  display: flex;
+  /* border: solid white 2px; */
+  line-height: 100%;
+}
 
+.ddHeaderArrow {
+  width: 25%;
+  /* border: solid white 2px; */
 }
 
 .ddList {
-
+  width: 496px;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  border: solid #6E6E6E 2px;
+  border-top: none;
+  overflow: scroll;
+  white-space: nowrap;
 }
 
 .ddListItem {
-  
+  background-color: #FFFFFF;
+  border: none;
+  padding: 10px 10px;
+  display: flex;
+  color: #6E6E6E;
+}
+
+.ddListItem:hover {
+  background-color: #E8F1F7;
+  cursor: pointer;
 }

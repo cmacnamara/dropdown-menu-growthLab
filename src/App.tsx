@@ -11,27 +11,31 @@ import Dropdown from './components/Dropdown/Dropdown'
 import { getLocations } from './services/listService.ts'
 
 // types
-import { DropdownProps, ListProp } from './types/props.ts'
+import { ListProp } from './types/props.ts'
 
 const App: React.FC = () => {
   const [list, setList] = useState<ListProp[]>([])
   
-  const resetThenSet = (id, key) => {
-
-  }
-
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (): Promise<void> => {
       const data = await getLocations()
-      const updatedData = data.map(datum => {
+      const updatedData: ListProp[] = data.map(datum => {
         return {...datum, selected: false}
       })
       setList(updatedData)
     }
     
     fetchData()
-      .catch(console.error)
+    .catch(console.error)
   }, [])
+  
+  const resetThenSet = (id, key) => {
+    const temp = list.map(item => {
+      if(item.id === id) return {...item, selected: true}
+      else return {...item, selected: false}
+    })
+    setList(temp)
+  }
   
   return (
     <div className='root'>

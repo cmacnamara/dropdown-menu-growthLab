@@ -1,24 +1,3 @@
 .root {
   display: 'flex';
 }
-
-.drawerPaper {
-  position: 'relative';
-  white-space: 'nowrap';
-  width: 240;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  background: #535454;
-  color: #fff;
-}
-
-.content {
-  flexGrow: 1;
-  height: '100vh';
-  overflow: 'auto';
-}
-
-.container {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}

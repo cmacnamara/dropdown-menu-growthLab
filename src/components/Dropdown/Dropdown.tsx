@@ -11,10 +11,6 @@ import { DropdownProps } from '../../types/props';
 const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: DropdownProps): JSX.Element => {
   const [isListOpen, setIsListOpen] = useState(isListOpenProp)
   const [headerTitle, setHeaderTitle] = useState(headerTitleProp)
-  const [list, setList] = useState(listProp)
-
-  console.log("PROP LIST", list);
-  
 
   const toggleList = () => {
     setIsListOpen(!isListOpen)
@@ -35,9 +31,10 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
         onClick={toggleList}
       >
         <div className={styles.ddHeaderTitle}>{headerTitle}</div>
+        <div className={styles.divider}>|</div>
         {isListOpen 
-          ? <FontAwesome name="angle-up" size="2x" />
-          : <FontAwesome name="angle-down" size="2x" />
+          ? <FontAwesome className={styles.ddHeaderArrow} name="caret-up" size="2x" />
+          : <FontAwesome className={styles.ddHeaderArrow}name="caret-down" size="2x" />
         }
       </button>
       {isListOpen && (
@@ -45,7 +42,7 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
           role="list"
           className={styles.ddList}
         >
-          {list.map((item,idx) => (
+          {listProp.map((item,idx) => (
             <button
               type='button'
               className={styles.ddListItem}
