@@ -2,7 +2,7 @@
 import styles from './Dropdown.module.css'
 
 // npm packages
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import FontAwesome from 'react-fontawesome'
 
 // types
@@ -43,23 +43,21 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
 
   document.addEventListener('mousedown', closeList)
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     if(isListOpen) {
-  //       window.addEventListener('click', closeList)
-  //     } else {
-  //       window.removeEventListener('click', closeList)
-  //     }
-  //     console.log("List is open:", isListOpen);
-      
-  //   }, 0)
-  //   console.log("Use effect");
-    
-  // }, [isListOpen])
-
   return (  
     <div className={styles.ddWrapper} ref={countyMenu}>
-      <button
+      <div className={styles.ddHeader}>
+        <input className={styles.headerTitle}type="text" placeholder={headerTitle} />
+        {headerTitle !== headerTitleProp 
+          ? <div onClick={handleClearSelection}>X</div>
+          : ''
+        }
+        <div className={styles.divider}> | </div>
+        {isListOpen 
+          ? <FontAwesome className={styles.ddHeaderArrow} name="caret-up" size="2x" onClick={toggleList}/>
+          : <FontAwesome className={styles.ddHeaderArrow}name="caret-down" size="2x" onClick={toggleList}/>
+        }
+      </div>
+      {/* <button
         type='button'
         className={styles.ddHeader}
         
@@ -69,12 +67,12 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
           ? <div onClick={handleClearSelection}>X</div>
           : ''
         }
-        <div className={styles.divider}>|</div>
+        <div className={styles.divider}> | </div>
         {isListOpen 
           ? <FontAwesome className={styles.ddHeaderArrow} name="caret-up" size="2x" onClick={toggleList}/>
           : <FontAwesome className={styles.ddHeaderArrow}name="caret-down" size="2x" onClick={toggleList}/>
         }
-      </button>
+      </button> */}
       {isListOpen && (
         <div
           role="list"
@@ -111,8 +109,6 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
                 </>
               ))}
             </>
-            
-            
           ))}
         </div>
       )}

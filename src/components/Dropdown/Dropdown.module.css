@@ -23,11 +23,23 @@
   cursor: pointer;
 }
 
+input {
+  border: 0;
+  outline: 0;
+  width: 500px;
+  font-size: 30px;
+  color: #6E6E6E;
+}
+
+input:focus {
+  outline:none!important;
+}
+
 .ddHeaderTitle {
   width: 90%;
   height: 100%;
   display: flex;
-  /* border: solid white 2px; */
+  
   line-height: 100%;
 }
 
@@ -75,4 +87,5 @@
 .divider {
   font-size: 30px;
   font-weight: 100;
+  padding: 0 5px;
 }
