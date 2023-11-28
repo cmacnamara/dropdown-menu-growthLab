@@ -27,7 +27,6 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
   }
 
   const nestedData = formatData(listProp)
-  console.log(nestedData);
 
   const selectItem = item => {
     const { name, id, level } = item
@@ -48,14 +47,16 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
       <div className={styles.ddHeader}>
         <input className={styles.headerTitle}type="text" placeholder={headerTitle} />
         {headerTitle !== headerTitleProp 
-          ? <div onClick={handleClearSelection}>X</div>
+          ? <div className={styles.closeBtn} onClick={handleClearSelection}>X</div>
           : ''
         }
-        <div className={styles.divider}> | </div>
-        {isListOpen 
-          ? <FontAwesome className={styles.ddHeaderArrow} name="caret-up" size="2x" onClick={toggleList}/>
-          : <FontAwesome className={styles.ddHeaderArrow}name="caret-down" size="2x" onClick={toggleList}/>
-        }
+        <div className={styles.menuButtons}>
+          <div className={styles.divider}> | </div>
+          {isListOpen 
+            ? <FontAwesome className={styles.ddHeaderArrow} name="caret-up" size="2x" onClick={toggleList}/>
+            : <FontAwesome className={styles.ddHeaderArrow}name="caret-down" size="2x" onClick={toggleList}/>
+          }
+        </div>
       </div>
       {isListOpen && (
         <div
