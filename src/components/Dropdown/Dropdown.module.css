@@ -15,10 +15,12 @@
   background-color: #FFFFFF;
   border: solid #6E6E6E 2px;
   color: #6E6E6E;
+  font-size: 30px;
+  padding: 0 20px;
 }
 
 .ddHeaderTitle {
-  width: 75%;
+  width: 90%;
   height: 100%;
   display: flex;
   /* border: solid white 2px; */
@@ -26,13 +28,15 @@
 }
 
 .ddHeaderArrow {
-  width: 25%;
+  width: 10%;
+  display: flex;
+  justify-content: center;
   /* border: solid white 2px; */
 }
 
 .ddList {
   width: 496px;
-  max-height: 400px;
+  max-height: 800px;
   display: flex;
   flex-direction: column;
   background-color: #FFFFFF;
@@ -45,7 +49,8 @@
 .ddListItem {
   background-color: #FFFFFF;
   border: none;
-  padding: 10px 10px;
+  font-size: 30px;
+  padding: 10px 20px;
   display: flex;
   color: #6E6E6E;
 }
@@ -53,4 +58,9 @@
 .ddListItem:hover {
   background-color: #E8F1F7;
   cursor: pointer;
+}
+
+.divider {
+  font-size: 30px;
+  font-weight: 100;
 }
