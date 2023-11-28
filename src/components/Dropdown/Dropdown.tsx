@@ -33,6 +33,11 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
     resetThenSet(id, level)
   }
 
+  const handleClearSelection = () => {
+    setIsListOpen(true)
+    setHeaderTitle(headerTitleProp)
+  }
+
   // useEffect(() => {
   //   setTimeout(() => {
   //     if(isListOpen) {
@@ -52,13 +57,17 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
       <button
         type='button'
         className={styles.ddHeader}
-        onClick={toggleList}
+        
       >
         <div className={styles.ddHeaderTitle}>{headerTitle}</div>
+        {headerTitle !== headerTitleProp 
+          ? <div onClick={handleClearSelection}>X</div>
+          : ''
+        }
         <div className={styles.divider}>|</div>
         {isListOpen 
-          ? <FontAwesome className={styles.ddHeaderArrow} name="caret-up" size="2x" />
-          : <FontAwesome className={styles.ddHeaderArrow}name="caret-down" size="2x" />
+          ? <FontAwesome className={styles.ddHeaderArrow} name="caret-up" size="2x" onClick={toggleList}/>
+          : <FontAwesome className={styles.ddHeaderArrow}name="caret-down" size="2x" onClick={toggleList}/>
         }
       </button>
       {isListOpen && (
