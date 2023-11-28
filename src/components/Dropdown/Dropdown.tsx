@@ -57,22 +57,6 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
           : <FontAwesome className={styles.ddHeaderArrow}name="caret-down" size="2x" onClick={toggleList}/>
         }
       </div>
-      {/* <button
-        type='button'
-        className={styles.ddHeader}
-        
-      >
-        <div className={styles.ddHeaderTitle}>{headerTitle}</div>
-        {headerTitle !== headerTitleProp 
-          ? <div onClick={handleClearSelection}>X</div>
-          : ''
-        }
-        <div className={styles.divider}> | </div>
-        {isListOpen 
-          ? <FontAwesome className={styles.ddHeaderArrow} name="caret-up" size="2x" onClick={toggleList}/>
-          : <FontAwesome className={styles.ddHeaderArrow}name="caret-down" size="2x" onClick={toggleList}/>
-        }
-      </button> */}
       {isListOpen && (
         <div
           role="list"
