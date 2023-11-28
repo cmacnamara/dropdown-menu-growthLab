@@ -1,10 +1,16 @@
+// css
 import './App.css'
 
-function App() {
+// npm packages
+
+// components
+import Dropdown from './components/Dropdown/Dropdown'
+
+const App: React.FC = () => {
   return (
-    <>
-      Hello.
-    </>
+    <div className='root'>
+      <Dropdown />
+    </div>
   )
 }
 
