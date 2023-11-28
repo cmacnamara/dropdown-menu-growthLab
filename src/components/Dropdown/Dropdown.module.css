@@ -12,13 +12,12 @@
 
 .ddHeader {
   max-width: 500px;
-  display: flex;
-  align-items: center;
+  display: flex; 
   background-color: #FFFFFF;
   border: solid #6E6E6E 2px;
   color: #6E6E6E;
   font-size: 30px;
-  padding: 0 20px;
+  padding-left: 20px;
 }
 
 .ddHeader:hover {
@@ -46,9 +45,10 @@ input:focus {
 }
 
 .ddHeaderArrow {
-  width: 10%;
+  /* width: 10%; */
   display: flex;
   justify-content: center;
+  right: 35px; 
 }
 
 .ddList {
@@ -86,7 +86,9 @@ input:focus {
 }
 
 .divider {
-  font-size: 30px;
+  font-size: 50px;
   font-weight: 100;
   padding: 0 5px;
+  padding-bottom: 5px;
+  margin-right: 5px;
 }
