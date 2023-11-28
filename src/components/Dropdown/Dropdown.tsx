@@ -14,6 +14,8 @@ import { formatData } from '../../services/data-modeler';
 const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: DropdownProps): JSX.Element => {
   const [isListOpen, setIsListOpen] = useState(isListOpenProp)
   const [headerTitle, setHeaderTitle] = useState(headerTitleProp)
+  const [searchInput, setSearchInput] = useState('')
+  const [displayedCounties, setDisplayedCounties] = useState(formatData(listProp))
   const countyMenu = useRef(null)
 
   const toggleList = () => {
@@ -27,6 +29,7 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
   }
 
   const nestedData = formatData(listProp)
+  //setDisplayedCounties(nestedData)
 
   const selectItem = item => {
     const { name, id, level } = item
@@ -40,12 +43,44 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
     setHeaderTitle(headerTitleProp)
   }
 
+  const filterCountiesBySearch = (query: string) => {
+    const filteredCounties = nestedData.map(region => {
+      const filteredStates = region.statesWithCounties.map(state => {
+        const filteredCounties = state.counties.filter(county => {
+          return county.name.toLowerCase().includes(query.toLowerCase())
+        })
+        return {...state, counties: filteredCounties}
+      })
+      return {...region, statesWithCounties: filteredStates}
+    })
+    
+    return filteredCounties
+  }
+
+  const handleSearchChange = e => {
+    setSearchInput(e.target.value)
+    let filteredCounties;
+    if(e.target.value === '') {
+      filteredCounties = nestedData
+    } else {
+      filteredCounties = filterCountiesBySearch(e.target.value)
+      if(!isListOpen) setIsListOpen(true)
+    }
+    
+    setDisplayedCounties(filteredCounties)
+  }
+
   document.addEventListener('mousedown', closeList)
 
   return (  
     <div className={styles.ddWrapper} ref={countyMenu}>
       <div className={styles.ddHeader}>
-        <input className={styles.headerTitle}type="text" placeholder={headerTitle} />
+        <input 
+          className={styles.headerTitle}
+          type="text" 
+          placeholder={headerTitle} 
+          onChange={handleSearchChange}
+        />
         {headerTitle !== headerTitleProp 
           ? <div className={styles.closeBtn} onClick={handleClearSelection}>X</div>
           : ''
@@ -63,7 +98,7 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
           role="list"
           className={styles.ddList}
         >
-          {nestedData.map((item,idx) => (
+          {displayedCounties.map((item,idx) => (
             <>
               <button
                 type='button'
