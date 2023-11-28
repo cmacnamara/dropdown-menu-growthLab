@@ -2,7 +2,7 @@
 import styles from './Dropdown.module.css'
 
 // npm packages
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import FontAwesome from 'react-fontawesome'
 
 // types
@@ -14,13 +14,16 @@ import { formatData } from '../../services/data-modeler';
 const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: DropdownProps): JSX.Element => {
   const [isListOpen, setIsListOpen] = useState(isListOpenProp)
   const [headerTitle, setHeaderTitle] = useState(headerTitleProp)
+  const countyMenu = useRef(null)
 
   const toggleList = () => {
     setIsListOpen(!isListOpen)
   }
 
-  const closeList = () => {
-    setIsListOpen(false)
+  const closeList = (e) => {
+    if(countyMenu.current && isListOpen && !countyMenu.current.contains(e.target)) {
+      setIsListOpen(false)
+    }
   }
 
   const nestedData = formatData(listProp)
@@ -38,6 +41,8 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
     setHeaderTitle(headerTitleProp)
   }
 
+  document.addEventListener('mousedown', closeList)
+
   // useEffect(() => {
   //   setTimeout(() => {
   //     if(isListOpen) {
@@ -53,7 +58,7 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
   // }, [isListOpen])
 
   return (  
-    <div className={styles.ddWrapper}>
+    <div className={styles.ddWrapper} ref={countyMenu}>
       <button
         type='button'
         className={styles.ddHeader}

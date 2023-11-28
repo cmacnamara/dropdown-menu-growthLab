@@ -4,7 +4,7 @@ To run this project locally, simply clone this repo and install the dependencies
 
 Detailed instructions:
 
-1. Open terminal
+1. Open terminal.
 2. Change the current working directory to the location where you want the cloned directory.
 3. Run the following: 
 
