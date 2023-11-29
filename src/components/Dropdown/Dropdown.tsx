@@ -33,6 +33,7 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
   const selectItem = item => {
     const { name, id, level } = item
     setHeaderTitle(name)
+    setSearchInput(name)
     setIsListOpen(false)
     resetThenSet(id, level)
   }
