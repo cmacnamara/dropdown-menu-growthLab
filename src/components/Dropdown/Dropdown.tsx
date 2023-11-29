@@ -29,7 +29,6 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
   }
 
   const nestedData = formatData(listProp)
-  //setDisplayedCounties(nestedData)
 
   const selectItem = item => {
     const { name, id, level } = item
@@ -44,17 +43,23 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
   }
 
   const filterCountiesBySearch = (query: string) => {
-    const filteredCounties = nestedData.map(region => {
-      const filteredStates = region.statesWithCounties.map(state => {
+    const mappedRegions = nestedData.map(region => {
+      const mappedStates = region.statesWithCounties.map(state => {
         const filteredCounties = state.counties.filter(county => {
           return county.name.toLowerCase().includes(query.toLowerCase())
         })
         return {...state, counties: filteredCounties}
       })
+      const filteredStates = mappedStates.filter(state => {
+        return state.counties.length > 0
+      })
       return {...region, statesWithCounties: filteredStates}
     })
+    const filteredRegions = mappedRegions.filter(region => {
+      return region.statesWithCounties.length > 0
+    })
     
-    return filteredCounties
+    return filteredRegions
   }
 
   const handleSearchChange = e => {
@@ -80,6 +85,7 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
           type="text" 
           placeholder={headerTitle} 
           onChange={handleSearchChange}
+          value={searchInput}
         />
         {headerTitle !== headerTitleProp 
           ? <div className={styles.closeBtn} onClick={handleClearSelection}>X</div>
