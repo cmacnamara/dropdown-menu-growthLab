@@ -1,8 +1,10 @@
+// Loosely based around: https://blog.logrocket.com/customize-reusable-react-dropdown-menu-component/
+
 // css
 import styles from './Dropdown.module.css'
 
 // npm packages
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import FontAwesome from 'react-fontawesome'
 
 // types
@@ -12,13 +14,19 @@ import { DropdownProps } from '../../types/props';
 import { formatData } from '../../services/data-modeler';
 
 const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: DropdownProps): JSX.Element => {
+  const nestedData = formatData(listProp)
+  console.log("Nested data", nestedData);
+  
   const [isListOpen, setIsListOpen] = useState(isListOpenProp)
   const [headerTitle, setHeaderTitle] = useState(headerTitleProp)
   const [searchInput, setSearchInput] = useState('')
-  const [displayedCounties, setDisplayedCounties] = useState(formatData(listProp))
+  const [displayedCounties, setDisplayedCounties] = useState(nestedData)
   const countyMenu = useRef(null)
 
+
   const toggleList = () => {
+    console.log(displayedCounties);
+    
     setIsListOpen(!isListOpen)
   }
 
@@ -28,7 +36,6 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
     }
   }
 
-  const nestedData = formatData(listProp)
 
   const selectItem = item => {
     const { name, id, level } = item
@@ -40,7 +47,9 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
 
   const handleClearSelection = () => {
     setIsListOpen(true)
+    setSearchInput('')
     setHeaderTitle(headerTitleProp)
+    setDisplayedCounties(nestedData)
   }
 
   const filterCountiesBySearch = (query: string) => {
@@ -87,6 +96,7 @@ const Dropdown = ({ isListOpenProp, headerTitleProp, listProp, resetThenSet }: D
           placeholder={headerTitle} 
           onChange={handleSearchChange}
           value={searchInput}
+          autoFocus={searchInput === ''}
         />
         {headerTitle !== headerTitleProp 
           ? <div className={styles.closeBtn} onClick={handleClearSelection}>X</div>

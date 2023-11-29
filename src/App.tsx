@@ -9,6 +9,7 @@ import Dropdown from './components/Dropdown/Dropdown'
 
 // services
 import { getLocations } from './services/listService.ts'
+import { formatData } from './services/data-modeler';
 
 // types
 import { ListProp } from './types/props.ts'
@@ -39,12 +40,16 @@ const App: React.FC = () => {
   
   return (
     <div className='root'>
-      <Dropdown 
-        isListOpenProp={false} 
-        headerTitleProp={'Please select a county'} 
-        listProp={list} 
-        resetThenSet={resetThenSet}        
-      />
+      {list.length === 0 ?
+        <h1>Loading...</h1>
+        :
+        <Dropdown 
+          isListOpenProp={false} 
+          headerTitleProp={'Please select a county'} 
+          listProp={list} 
+          resetThenSet={resetThenSet}        
+        />
+      }
     </div>
   )
 }
